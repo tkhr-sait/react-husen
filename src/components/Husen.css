@@ -1,7 +1,9 @@
 .Husen {
   display: inline-block;
   align-items: center;
-  width: 128px;
-  height: 64px;
+  width: 192px;
+  height: 96px;
+  padding: 10px;
+  margin: 10px;
   filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
 }

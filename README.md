@@ -20,7 +20,20 @@ npm i react-husen
 
 ## Usage
 
-TODO 
+### source code
+
+```
+TODO sample code
+```
+
+### demo
+
+```
+git clone https://github.com/tkhr-sait/react-husen.git
+cd react-husen
+npm i
+npm start
+```
 
 ## Licence
 
@@ -37,8 +50,8 @@ Apache License 2.0
 
 * [x] drag & drop
 * [x] move
-* [ ] add/delete button
-* [ ] edit title/descriotion
-* [ ] event
-* [ ] component package
+* [x] add/delete button@demo
+* [x] edit title/descriotion@demo
+* [x] event
+* [x] component package
 * [ ] redux

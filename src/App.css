@@ -24,7 +24,7 @@ html, body {
   max-width: 50vw;
   width: 50vw;
   overflow: auto;
-  background-color: #BEFEBE;
+  background-color: #DEFEDE;
 }
 .b {
   grid-row-start: 1;
@@ -38,5 +38,5 @@ html, body {
   max-width: 50vw;
   width: 50vw;
   overflow: auto;
-  background-color: #FEBEBE;
+  background-color: #FEDEDE;
 }
