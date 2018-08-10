@@ -12,7 +12,7 @@ class Container extends Component {
 			notes: notes,
 			id: Uuid.v1()
     }
-		if (typeof this.props.onNotesChange) {
+		if (typeof this.props.onNotesChange === 'function') {
       this.props.onNotesChange(notes)
 		}
 	}
@@ -55,7 +55,7 @@ class Container extends Component {
 		this.setState({
 			notes: notes
 		})
-		if (typeof this.props.onNotesChange) {
+		if (typeof this.props.onNotesChange === 'function') {
       this.props.onNotesChange(notes)
 		}
 	}

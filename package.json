@@ -1,9 +1,20 @@
 {
   "name": "react-husen",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "description": "husen(sticky note) for react",
+  "license": "Apache-2.0",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "files": [ "dist", "README.md" ],
+  "homepage": "https://tkhr-sait.github.io/react-husen",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "react",
+    "husen",
+    "sticky note"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tkhr-sait/react-husen.git"
@@ -18,14 +29,18 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "react-scripts": "1.1.4",
+    "babel-cli": "^6.26.0",
+    "gh-pages": "^1.2.0",
     "mdbreact": "^4.6.1",
-    "babel-cli": "^6.26.0"
+    "react-scripts": "1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "build-demo": "react-scripts build",
     "build": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }

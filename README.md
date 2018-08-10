@@ -4,7 +4,7 @@ Overview
 
 ## Description
 
-husen(post it note) for react
+husen(sticky note) for react
 
 ## Requirement
 
@@ -55,3 +55,4 @@ Apache License 2.0
 * [x] event
 * [x] component package
 * [ ] redux
+* [ ] deploy demo
