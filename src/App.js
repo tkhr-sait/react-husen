@@ -10,14 +10,16 @@ class App extends Component {
       notesA: [
         {
           title: "test1",
-          description: ""
+          description: "",
+          items: {user: "test1",timestamp: "2018/08/10 12:34:56"}
         },
         {
           id: "2",
           title: "test2",
           description: "",
           x: 64,
-          y: 32
+          y: 32,
+          items: {user: "test2",timestamp: "2000/01/01 00:00:00"}
         }
       ],
       notesB: [
@@ -26,14 +28,16 @@ class App extends Component {
           title: "test3",
           description: "text",
           x: 32,
-          y: 32
+          y: 32,
+          items: {user: "test3"}
         },
         {
           id: "4",
           title: "test4",
           description: "text",
           x: 64,
-          y: 32
+          y: 32,
+          items: {user: "test4"}
         }
       ],
       modal: false,
@@ -111,6 +115,22 @@ class App extends Component {
   handleDescriptionChange(e){
     this.setState({description: e.target.value})
   }
+  handleNoteInitialize(note){
+    let user = window.navigator.userAgent
+    note.items = {user: user,timestamp: "2018/08/10 12:34:56"}
+    return note
+  }
+  handleNoteRendarText(note){
+    return(<div style={{height:"100%",width:"100%",position: "relative"}}>
+             <span>{note.title}</span>
+             <span style={{fontSize: "50%",right:0,bottom:0,position: "absolute"}}>
+               {note.items.timestamp}
+             </span>
+           </div>)
+  }
+  handleNoteRendarTooltip(note){
+    return note.items.user + " wrote:\n" + note.description
+  }
   render() {
     return (
       <div className="App">
@@ -124,6 +144,9 @@ class App extends Component {
            onNoteAdd={this.handleNoteAdd.bind(this)}
            onNoteDelete={this.handleNoteDelete.bind(this)}
            onNotesChange={this.handleNotesAChange.bind(this)}
+           onNoteInitialize={this.handleNoteInitialize.bind(this)}
+           onNoteRendarText={this.handleNoteRendarText.bind(this)}
+           onNoteRendarTooltip={this.handleNoteRendarTooltip.bind(this)}
            notes={this.state.notesA} />
         </div>
         <div className="b">
@@ -143,12 +166,14 @@ class App extends Component {
               <Input
                label="title"
                onChange={this.handleTitleChange.bind(this)}
-               value={this.state.title} />
+               value={this.state.title}
+               />
               <Input
                type="textarea"
                label="description"
                onChange={this.handleDescriptionChange.bind(this)}
-               value={this.state.description} />
+               value={this.state.description} 
+               />
             </ModalBody>
             <ModalFooter>
               <Button color="danger" onClick={this.handleDelete.bind(this)}>Delete</Button>

@@ -27,14 +27,23 @@ class Husen extends Component {
 
   render() {
     const { connectDragSource, title, description } = this.props;
+    let tooltip = description
+    if (typeof this.props.onNoteRendarTooltip === 'function') {
+      tooltip = this.props.onNoteRendarTooltip(this.props)
+    }
+    let text = title
+    if (typeof this.props.onNoteRendarText === 'function') {
+      text = this.props.onNoteRendarText(this.props)
+    }
+
     return connectDragSource(
       <div
        className="Husen" 
        style={this.getStyles(this.props)}
-       title={description}
+       title={tooltip}
        onClick={this.handleClick.bind(this)}
        >
-        {title}
+        {text}
      </div>
     )
   }

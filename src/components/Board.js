@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { DragDropContext } from 'react-dnd';
+import React, { Component } from 'react'
+import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-//import TouchBackend from 'react-dnd-touch-backend'
+import TouchBackend from 'react-dnd-touch-backend'
+import Modernizr from 'browsernizr'
 import Container from './Container'
 import './Board.css'
 
-// TODO issue
 class Board extends Component {
   constructor(props) {
     super(props);
@@ -30,10 +30,12 @@ class Board extends Component {
          onNoteAdd={this.props.onNoteAdd}
          onNoteDelete={this.props.onNoteDelete}
          onNotesChange={this.props.onNotesChange}
+         onNoteInitialize={this.props.onNoteInitialize}
+         onNoteRendarText={this.props.onNoteRendarText}
+         onNoteRendarTooltip={this.props.onNoteRendarTooltip}
          notes={this.state.notes}/>
       </div>
     )
   }
 }
-
-export default DragDropContext(HTML5Backend)(Board);
+export default DragDropContext(Modernizr.touchevents ? TouchBackend({ enableMouseEvents: true }) : HTML5Backend)(Board)

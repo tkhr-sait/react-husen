@@ -40,6 +40,10 @@ class Container extends Component {
 		// FIXME i18n
 		n.title = note.title ? note.title : ( this.props.defaultTitle ? this.props.defaultTitle : "title" )
 		n.description = note.description ? note.description : ( this.props.defaultDescription ? this.props.defaultDescription : "description")
+		n.items = n.items ? n.items : {}
+		if (typeof this.props.onNoteInitialize === 'function') {
+      n = this.props.onNoteInitialize(n)
+		}
 		return n
   }
 
@@ -93,12 +97,15 @@ class Container extends Component {
 				description={note.description}
 				x={note.x}
 				y={note.y}
+				items={note.items}
 
 				defaultTitle={this.props.defaultTitle}
 				defaultDescription={this.props.defaultDescription}
 				color={this.props.color}
 				container={this}
 				onNoteClick={this.props.onNoteClick}
+				onNoteRendarText={this.props.onNoteRendarText}
+				onNoteRendarTooltip={this.props.onNoteRendarTooltip}
 			/>
 		  )
 		})

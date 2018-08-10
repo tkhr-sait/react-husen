@@ -1,6 +1,7 @@
 # react-husen
 
-Overview
+Overview  
+[![npm version](https://badge.fury.io/js/react-husen.svg)](https://badge.fury.io/js/react-husen)  
 
 ## Description
 
@@ -8,9 +9,9 @@ husen(sticky note) for react
 
 ## Requirement
 
-react
-react-dnd
-uuid
+react  
+react-dnd  
+uuid  
 
 ## Install
 
@@ -20,10 +21,24 @@ npm i react-husen
 
 ## Usage
 
-### source code
+### minimal
 
 ```
-TODO sample code
+import React, { Component } from 'react';
+import HusenBoard from 'react-husen';
+import './App.css';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <HusenBoard />
+      </div>
+    );
+  }
+}
+
+export default App;
 ```
 
 ### demo
@@ -54,5 +69,7 @@ Apache License 2.0
 * [x] edit title/descriotion@demo
 * [x] event
 * [x] component package
+* [x] deploy demo
+* [ ] additional info
 * [ ] redux
-* [ ] deploy demo
+
