@@ -112,7 +112,10 @@ class Container extends Component {
     const { connectDropTarget } = this.props;
  		return connectDropTarget(
 		  <div className="Container">
-		  	<h2>{this.props.label}<span style={{float: "right"}} onClick={this.addNewNote.bind(this)}>+</span></h2>
+				<h2 style={{margin: "0.2em 0.4em"}}>
+					{this.props.label}
+					<span style={{float: "right", cursor : "pointer"}} onClick={this.addNewNote.bind(this)}>+</span>
+				</h2>
 		  	{notes}
 		  </div>
 		)
