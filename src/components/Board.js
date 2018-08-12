@@ -26,6 +26,7 @@ class Board extends Component {
          color={this.props.color}
          defaultTitle={this.props.defaultTitle}
          defaultDescription={this.props.defaultDescription}
+         deleteButton={this.props.deleteButton}
          onNoteClick={this.props.onNoteClick}
          onNoteAdd={this.props.onNoteAdd}
          onNoteDelete={this.props.onNoteDelete}

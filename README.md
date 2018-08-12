@@ -70,6 +70,7 @@ Apache License 2.0
 * [x] event
 * [x] component package
 * [x] deploy demo
-* [ ] additional info
+* [x] additional info
+* [x] customize note
 * [ ] redux
 

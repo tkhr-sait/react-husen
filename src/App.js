@@ -1,43 +1,30 @@
 import React, { Component } from 'react'
 import { Container, Input, Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'mdbreact';
 import HusenBoard from './components'
+import Dateformat from 'dateformat'
 import './App.css'
 
+
 class App extends Component {
+  getIP(){
+    var findIP = new Promise(r=>{var w=window,a=new (w.RTCPeerConnection||w.mozRTCPeerConnection||w.webkitRTCPeerConnection)({iceServers:[]}),b=()=>{};a.createDataChannel("");a.createOffer(c=>a.setLocalDescription(c,b,b),b);a.onicecandidate=c=>{try{c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r)}catch(e){}}})
+    Promise.all([findIP]).then(ip => this.setState({ip: ip})).catch(e => alert(e))
+  }
   constructor(props){
     super(props)
+    this.getIP()
     this.state = {
       notesA: [
         {
-          title: "test1",
-          description: "",
-          items: {user: "test1",timestamp: "2018/08/10 12:34:56"}
+          title: "test1"
         },
         {
           id: "2",
-          title: "test2",
-          description: "",
+          title: "",
+          description: "description",
           x: 64,
           y: 32,
-          items: {user: "test2",timestamp: "2000/01/01 00:00:00"}
-        }
-      ],
-      notesB: [
-        {
-          id: "3",
-          title: "test3",
-          description: "text",
-          x: 32,
-          y: 32,
-          items: {user: "test3"}
-        },
-        {
-          id: "4",
-          title: "test4",
-          description: "text",
-          x: 64,
-          y: 32,
-          items: {user: "test4"}
+          items: {user: "test2",timestamp: "2000-01-01 00:00:00"}
         }
       ],
       modal: false,
@@ -69,16 +56,7 @@ class App extends Component {
       }
       return n
     })
-    let notesId = "notesB"
-    let current = this.state.notesA.filter(note => {
-      if (note.id === this.state.target.id) {
-        return note
-      }
-    })
-    if (current.length > 0) {
-      notesId = "notesA"
-    }
-    this.setState({[notesId]: newNotes})
+    this.setState({notesA: newNotes})
     this.toggle()
   }
   handleDelete(){
@@ -87,16 +65,7 @@ class App extends Component {
         return n
       }
     })
-    let notesId = "notesB"
-    let current = this.state.notesA.filter(note => {
-      if (note.id === this.state.target.id) {
-        return note
-      }
-    })
-    if (current.length > 0) {
-      notesId = "notesA"
-    }
-    this.setState({[notesId]: newNotes})
+    this.setState({notesA: newNotes})
     this.toggle()
   }
   handleNoteAdd(note){
@@ -106,18 +75,10 @@ class App extends Component {
   handleNotesAChange(notes){
     this.setState({notesA: notes})
   }
-  handleNotesBChange(notes){
-    this.setState({notesB: notes})
-  }
-  handleTitleChange(e){
-    this.setState({title: e.target.value})
-  }
-  handleDescriptionChange(e){
-    this.setState({description: e.target.value})
-  }
   handleNoteInitialize(note){
-    let user = window.navigator.userAgent
-    note.items = {user: user,timestamp: "2018/08/10 12:34:56"}
+    // additional items
+    note.items.user = note.items.user ? note.items.user : this.state.ip
+    note.items.timestamp = note.items.timestamp ? note.items.timestamp : Dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss')
     return note
   }
   handleNoteRendarText(note){
@@ -129,7 +90,14 @@ class App extends Component {
            </div>)
   }
   handleNoteRendarTooltip(note){
-    return note.items.user + " wrote:\n" + note.description
+    return note.id + "\n" + note.items.user + " wrote:\n" + note.description
+  }
+
+  handleTitleChange(e){
+    this.setState({title: e.target.value})
+  }
+  handleDescriptionChange(e){
+    this.setState({description: e.target.value})
   }
   render() {
     return (
@@ -140,6 +108,7 @@ class App extends Component {
            color="lightgreen"
            defaultTitle="入力してください"
            defaultDescription="詳細を入力してください"
+           deleteButton={false}
            onNoteClick={this.handleNoteClick.bind(this)}
            onNoteAdd={this.handleNoteAdd.bind(this)}
            onNoteDelete={this.handleNoteDelete.bind(this)}
@@ -150,14 +119,7 @@ class App extends Component {
            notes={this.state.notesA} />
         </div>
         <div className="b">
-          <HusenBoard
-           label="B" 
-           color="lightpink"
-           onNoteClick={this.handleNoteClick.bind(this)}
-           onNoteAdd={this.handleNoteAdd.bind(this)}
-           onNoteDelete={this.handleNoteDelete.bind(this)}
-           onNotesChange={this.handleNotesBChange.bind(this)}
-           notes={this.state.notesB} />
+          <HusenBoard label="B" />
         </div>
         <Container>
           <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)} fullHeight position="right">

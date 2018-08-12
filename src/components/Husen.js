@@ -19,12 +19,15 @@ class Husen extends Component {
     }
   }
   
-  handleClick(){
+  handleNoteClick(e){
     if (typeof this.props.onNoteClick === 'function') {
       this.props.onNoteClick(this.props)
     }
   }
-
+  handleDeleteClick(e){
+    this.props.container.deleteNote(this.props)
+    e.stopPropagation()
+  }
   render() {
     const { connectDragSource, title, description } = this.props;
     let tooltip = description
@@ -35,16 +38,20 @@ class Husen extends Component {
     if (typeof this.props.onNoteRendarText === 'function') {
       text = this.props.onNoteRendarText(this.props)
     }
-
+    let deleteButton = ""
+    if (this.props.deleteButton === true) {
+      deleteButton = (<span title="delete note." style={{fontSize:"150%",top:0,right:"5px",position:"absolute",zIndex:1}} onClick={this.handleDeleteClick.bind(this)}>×</span>)
+    }
     return connectDragSource(
       <div
-       className="Husen" 
-       style={this.getStyles(this.props)}
-       title={tooltip}
-       onClick={this.handleClick.bind(this)}
-       >
+        className="Husen" 
+        style={this.getStyles(this.props)}
+        title={tooltip}
+        onClick={this.handleNoteClick.bind(this)}
+      >
+        {deleteButton}
         {text}
-     </div>
+      </div>
     )
   }
 }
