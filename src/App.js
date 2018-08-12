@@ -14,7 +14,7 @@ class App extends Component {
     super(props)
     this.getIP()
     this.state = {
-      notesA: [
+      notes: [
         {
           title: "test1"
         },
@@ -33,47 +33,22 @@ class App extends Component {
       description: ""
     }
   }
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    })
-  }
+  // husen event
   handleNoteClick(note){
     this.setState({
       target: note,
       title: note.title,
       description: note.description
     })
-    this.toggle()
-  }
-  handleSave(){
-    let newNotes = this.state.target.container.state.notes.map(n => {
-      if (this.state.target.id === n.id) {
-        let newNote = Object.assign({},this.state.target)
-        newNote.title = this.state.title
-        newNote.description = this.state.description
-        return newNote
-      }
-      return n
-    })
-    this.setState({notesA: newNotes})
-    this.toggle()
-  }
-  handleDelete(){
-    let newNotes = this.state.target.container.state.notes.filter(n => {
-      if (this.state.target.id !== n.id) {
-        return n
-      }
-    })
-    this.setState({notesA: newNotes})
+    // show modal
     this.toggle()
   }
   handleNoteAdd(note){
   }
   handleNoteDelete(note){
   }
-  handleNotesAChange(notes){
-    this.setState({notesA: notes})
+  handleNotesChange(notes){
+    this.setState({notes: notes})
   }
   handleNoteInitialize(note){
     // additional items
@@ -93,18 +68,47 @@ class App extends Component {
     return note.id + "\n" + note.items.user + " wrote:\n" + note.description
   }
 
+  // modal events
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
   handleTitleChange(e){
     this.setState({title: e.target.value})
   }
   handleDescriptionChange(e){
     this.setState({description: e.target.value})
   }
+  handleSave(){
+    let newNotes = this.state.target.container.state.notes.map(n => {
+      if (this.state.target.id === n.id) {
+        let newNote = Object.assign({},this.state.target)
+        newNote.title = this.state.title
+        newNote.description = this.state.description
+        return newNote
+      }
+      return n
+    })
+    this.setState({notes: newNotes})
+    this.toggle()
+  }
+  handleDelete(){
+    let newNotes = this.state.target.container.state.notes.filter(n => {
+      if (this.state.target.id !== n.id) {
+        return n
+      }
+    })
+    this.setState({notes: newNotes})
+    this.toggle()
+  }
+
   render() {
     return (
       <div className="App">
         <div className="a">
           <HusenBoard
-           label="A" 
+           label="customize" 
            color="lightgreen"
            defaultTitle="入力してください"
            defaultDescription="詳細を入力してください"
@@ -112,14 +116,14 @@ class App extends Component {
            onNoteClick={this.handleNoteClick.bind(this)}
            onNoteAdd={this.handleNoteAdd.bind(this)}
            onNoteDelete={this.handleNoteDelete.bind(this)}
-           onNotesChange={this.handleNotesAChange.bind(this)}
+           onNotesChange={this.handleNotesChange.bind(this)}
            onNoteInitialize={this.handleNoteInitialize.bind(this)}
            onNoteRendarText={this.handleNoteRendarText.bind(this)}
            onNoteRendarTooltip={this.handleNoteRendarTooltip.bind(this)}
-           notes={this.state.notesA} />
+           notes={this.state.notes} />
         </div>
         <div className="b">
-          <HusenBoard label="B" />
+          <HusenBoard label="minimal" />
         </div>
         <Container>
           <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)} fullHeight position="right">

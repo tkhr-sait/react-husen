@@ -41,7 +41,88 @@ class App extends Component {
 export default App;
 ```
 
-### demo
+### customize
+
+```
+import React, { Component } from 'react';
+import HusenBoard from 'react-husen';
+import './App.css';
+
+class App extends Component {
+  constructor(props){}
+    this.state = {
+      notes: [
+        {
+          title: "test1"
+        },
+        {
+          id: "2",
+          title: "test2",
+          description: "description",
+          x: 64,
+          y: 32,
+          items: {user: "test2",timestamp: "2000-01-01 00:00:00"}
+        }
+      ]
+    }
+  }
+
+  // husen event
+  handleNoteClick(note){
+  }
+  handleNoteAdd(note){
+  }
+  handleNoteDelete(note){
+  }
+  handleNotesChange(notes){
+    // update state
+    this.setState({notes: notes})
+  }
+  handleNoteInitialize(note){
+    // additional items
+    note.items.user = note.items.user ? note.items.user : "unknown user"
+    note.items.timestamp = note.items.timestamp ? note.items.timestamp : "2000-01-01 00:00:00"
+    return note
+  }
+  handleNoteRendarText(note){
+    return(<div style={{height:"100%",width:"100%",position: "relative"}}>
+             <span>{note.title}</span>
+             <span style={{fontSize: "50%",right:0,bottom:0,position: "absolute"}}>
+               {note.items.timestamp}
+             </span>
+           </div>)
+  }
+  handleNoteRendarTooltip(note){
+    return note.id + "\n" + note.items.user + " wrote:\n" + note.description
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <HusenBoard 
+           label="customize" 
+           color="lightgreen"
+           defaultTitle="please input title"
+           defaultDescription="please input description"
+           deleteButton={false}
+           onNoteClick={this.handleNoteClick.bind(this)}
+           onNoteAdd={this.handleNoteAdd.bind(this)}
+           onNoteDelete={this.handleNoteDelete.bind(this)}
+           onNotesChange={this.handleNotesChange.bind(this)}
+           onNoteInitialize={this.handleNoteInitialize.bind(this)}
+           onNoteRendarText={this.handleNoteRendarText.bind(this)}
+           onNoteRendarTooltip={this.handleNoteRendarTooltip.bind(this)}
+           notes={this.state.notes} />
+        />
+      </div>
+    )
+  }
+}
+
+export default App;
+```
+
+### develop
 
 ```
 git clone https://github.com/tkhr-sait/react-husen.git
@@ -60,17 +141,23 @@ Apache License 2.0
 
 ## Feature
 
+### drag & drop
+
+### husen events
+
+### additional info
 
 ## Todo
 
 * [x] drag & drop
 * [x] move
-* [x] add/delete button@demo
+* [x] delete button@demo
 * [x] edit title/descriotion@demo
 * [x] event
 * [x] component package
 * [x] deploy demo
 * [x] additional info
 * [x] customize note
+* [ ] add button@demo
 * [ ] redux
 
