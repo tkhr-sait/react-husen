@@ -5,5 +5,7 @@
   height: 96px;
   padding: 10px;
   margin: 10px;
-  filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
+
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  cursor: move;
 }
