@@ -122,7 +122,7 @@ class Container extends Component {
 		this.state.rendarAddButton=""
 		if (this.props.addButton !== false) {
       this.state.rendarAddButton=(
-			  <span title="add note." style={{right: 0,top: 0, position: "absolute"}} onClick={this.addNewNote.bind(this)}>
+			  <span title="add note." style={{right: "0.4em",top: "0.2em", position: "absolute", cursor: "pointer"}} onClick={this.addNewNote.bind(this)}>
 			    +
 			  </span>)
 		}

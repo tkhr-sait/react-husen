@@ -1,6 +1,6 @@
 {
   "name": "react-husen",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "husen(sticky note) for react",
   "license": "Apache-2.0",
   "main": "dist/index.js",

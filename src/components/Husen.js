@@ -40,7 +40,7 @@ class Husen extends Component {
     }
     let deleteButton = ""
     if (this.props.deleteButton === true) {
-      deleteButton = (<span title="delete note." style={{fontSize:"150%",top:0,right:"5px",position:"absolute",zIndex:1}} onClick={this.handleDeleteClick.bind(this)}>×</span>)
+      deleteButton = (<span title="delete note." style={{fontSize:"150%",top:0,right:"5px",position:"absolute",zIndex:1,cursor: "pointer"}} onClick={this.handleDeleteClick.bind(this)}>×</span>)
     }
     return connectDragSource(
       <div
