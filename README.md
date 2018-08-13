@@ -95,6 +95,13 @@ class App extends Component {
   handleNoteRendarTooltip(note){
     return note.id + "\n" + note.items.user + " wrote:\n" + note.description
   }
+  handleContainerRendarLabel(container){
+    return(
+    <h2 style={{margin: "0.2em 0.4em"}}>
+      {container.props.label}
+      <button onMouseUp={container.addNewNote.bind(container)} style={{right: 0,top: 0, position: "absolute"}}>Add New Husen</button>
+    </h2>)
+  }
 
   render() {
     return (
@@ -104,6 +111,7 @@ class App extends Component {
            color="lightgreen"
            defaultTitle="please input title"
            defaultDescription="please input description"
+           addButton={false}
            deleteButton={false}
            onNoteClick={this.handleNoteClick.bind(this)}
            onNoteAdd={this.handleNoteAdd.bind(this)}
@@ -112,6 +120,7 @@ class App extends Component {
            onNoteInitialize={this.handleNoteInitialize.bind(this)}
            onNoteRendarText={this.handleNoteRendarText.bind(this)}
            onNoteRendarTooltip={this.handleNoteRendarTooltip.bind(this)}
+           onContainerRendarLabel={this.handleContainerRendarLabel.bind(this)}
            notes={this.state.notes} />
         />
       </div>
@@ -158,6 +167,6 @@ Apache License 2.0
 * [x] deploy demo
 * [x] additional info
 * [x] customize note
-* [ ] add button@demo
+* [x] add button@demo
 * [ ] redux
 

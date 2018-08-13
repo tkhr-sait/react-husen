@@ -26,6 +26,7 @@ class Board extends Component {
          color={this.props.color}
          defaultTitle={this.props.defaultTitle}
          defaultDescription={this.props.defaultDescription}
+         addButton={this.props.addButton}
          deleteButton={this.props.deleteButton}
          onNoteClick={this.props.onNoteClick}
          onNoteAdd={this.props.onNoteAdd}
@@ -34,6 +35,7 @@ class Board extends Component {
          onNoteInitialize={this.props.onNoteInitialize}
          onNoteRendarText={this.props.onNoteRendarText}
          onNoteRendarTooltip={this.props.onNoteRendarTooltip}
+         onContainerRendarLabel={this.props.onContainerRendarLabel}
          notes={this.state.notes}/>
       </div>
     )

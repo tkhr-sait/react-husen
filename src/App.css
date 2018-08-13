@@ -12,6 +12,9 @@ html, body {
 .Container {
   min-height: 100vh;
 }
+.a .Husen {
+  min-width: 224px;
+}
 .a {
   grid-row-start: 1;
   grid-row-end: 1;

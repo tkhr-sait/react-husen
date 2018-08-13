@@ -58,14 +58,22 @@ class App extends Component {
   }
   handleNoteRendarText(note){
     return(<div style={{height:"100%",width:"100%",position: "relative"}}>
-             <span>{note.title}</span>
+             <h6 style={{backgroundColor:"rgba(32,192,32,0.3)"}}>{note.title}</h6>
+             <span>{note.description}</span>
              <span style={{fontSize: "50%",right:0,bottom:0,position: "absolute"}}>
                {note.items.timestamp}
              </span>
            </div>)
   }
   handleNoteRendarTooltip(note){
-    return note.id + "\n" + note.items.user + " wrote:\n" + note.description
+    return note.id + "\n" + note.items.user
+  }
+  handleContainerRendarLabel(container){
+    return(
+    <h2 style={{margin: "0.2em 0.4em"}}>
+      {container.props.label}
+      <Button onMouseUp={container.addNewNote.bind(container)} style={{right: 0,top: 0, position: "absolute"}}>Add New Husen</Button>
+    </h2>)
   }
 
   // modal events
@@ -112,6 +120,7 @@ class App extends Component {
            color="lightgreen"
            defaultTitle="入力してください"
            defaultDescription="詳細を入力してください"
+           addButton={true}
            deleteButton={false}
            onNoteClick={this.handleNoteClick.bind(this)}
            onNoteAdd={this.handleNoteAdd.bind(this)}
@@ -120,6 +129,7 @@ class App extends Component {
            onNoteInitialize={this.handleNoteInitialize.bind(this)}
            onNoteRendarText={this.handleNoteRendarText.bind(this)}
            onNoteRendarTooltip={this.handleNoteRendarTooltip.bind(this)}
+           onContainerRendarLabel={this.handleContainerRendarLabel.bind(this)}
            notes={this.state.notes} />
         </div>
         <div className="b">
