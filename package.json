@@ -1,6 +1,6 @@
 {
   "name": "react-husen",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "husen(sticky note) for react",
   "license": "Apache-2.0",
   "main": "dist/index.js",
@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "browsernizr": "^2.2.0",
-    "dateformat": "^3.0.3",
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^5.0.1",
     "react-dnd-touch-backend": "^0.5.1",
@@ -35,6 +34,7 @@
     "babel-cli": "^6.26.0",
     "gh-pages": "^1.2.0",
     "mdbreact": "^4.6.1",
+    "dateformat": "^3.0.3",
     "react-scripts": "1.1.4"
   },
   "scripts": {

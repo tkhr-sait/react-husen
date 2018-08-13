@@ -14,7 +14,7 @@ class App extends Component {
     super(props)
     this.getIP()
     this.state = {
-      notesA: [
+      notes: [
         {
           title: "test1"
         },
@@ -33,18 +33,60 @@ class App extends Component {
       description: ""
     }
   }
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    })
-  }
+  // husen event
   handleNoteClick(note){
     this.setState({
       target: note,
       title: note.title,
       description: note.description
     })
+    // show modal
     this.toggle()
+  }
+  handleNoteAdd(note){
+  }
+  handleNoteDelete(note){
+  }
+  handleNotesChange(notes){
+    this.setState({notes: notes})
+  }
+  handleNoteInitialize(note){
+    // additional items
+    note.items.user = note.items.user ? note.items.user : this.state.ip
+    note.items.timestamp = note.items.timestamp ? note.items.timestamp : Dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss')
+    return note
+  }
+  handleNoteRendarText(note){
+    return(<div style={{height:"100%",width:"100%",position: "relative"}}>
+             <h6 style={{backgroundColor:"rgba(32,192,32,0.3)"}}>{note.title}</h6>
+             <span>{note.description}</span>
+             <span style={{fontSize: "50%",right:0,bottom:0,position: "absolute"}}>
+               {note.items.timestamp}
+             </span>
+           </div>)
+  }
+  handleNoteRendarTooltip(note){
+    return note.id + "\n" + note.items.user
+  }
+  handleContainerRendarLabel(container){
+    return(
+    <h2 style={{margin: "0.2em 0.4em"}}>
+      {container.props.label}
+      <Button onMouseUp={container.addNewNote.bind(container)} style={{right: 0,top: 0, position: "absolute"}}>Add New Husen</Button>
+    </h2>)
+  }
+
+  // modal events
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
+  handleTitleChange(e){
+    this.setState({title: e.target.value})
+  }
+  handleDescriptionChange(e){
+    this.setState({description: e.target.value})
   }
   handleSave(){
     let newNotes = this.state.target.container.state.notes.map(n => {
@@ -56,7 +98,7 @@ class App extends Component {
       }
       return n
     })
-    this.setState({notesA: newNotes})
+    this.setState({notes: newNotes})
     this.toggle()
   }
   handleDelete(){
@@ -65,61 +107,33 @@ class App extends Component {
         return n
       }
     })
-    this.setState({notesA: newNotes})
+    this.setState({notes: newNotes})
     this.toggle()
   }
-  handleNoteAdd(note){
-  }
-  handleNoteDelete(note){
-  }
-  handleNotesAChange(notes){
-    this.setState({notesA: notes})
-  }
-  handleNoteInitialize(note){
-    // additional items
-    note.items.user = note.items.user ? note.items.user : this.state.ip
-    note.items.timestamp = note.items.timestamp ? note.items.timestamp : Dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss')
-    return note
-  }
-  handleNoteRendarText(note){
-    return(<div style={{height:"100%",width:"100%",position: "relative"}}>
-             <span>{note.title}</span>
-             <span style={{fontSize: "50%",right:0,bottom:0,position: "absolute"}}>
-               {note.items.timestamp}
-             </span>
-           </div>)
-  }
-  handleNoteRendarTooltip(note){
-    return note.id + "\n" + note.items.user + " wrote:\n" + note.description
-  }
 
-  handleTitleChange(e){
-    this.setState({title: e.target.value})
-  }
-  handleDescriptionChange(e){
-    this.setState({description: e.target.value})
-  }
   render() {
     return (
       <div className="App">
         <div className="a">
           <HusenBoard
-           label="A" 
+           label="customize" 
            color="lightgreen"
            defaultTitle="入力してください"
            defaultDescription="詳細を入力してください"
+           addButton={true}
            deleteButton={false}
            onNoteClick={this.handleNoteClick.bind(this)}
            onNoteAdd={this.handleNoteAdd.bind(this)}
            onNoteDelete={this.handleNoteDelete.bind(this)}
-           onNotesChange={this.handleNotesAChange.bind(this)}
+           onNotesChange={this.handleNotesChange.bind(this)}
            onNoteInitialize={this.handleNoteInitialize.bind(this)}
            onNoteRendarText={this.handleNoteRendarText.bind(this)}
            onNoteRendarTooltip={this.handleNoteRendarTooltip.bind(this)}
-           notes={this.state.notesA} />
+           onContainerRendarLabel={this.handleContainerRendarLabel.bind(this)}
+           notes={this.state.notes} />
         </div>
         <div className="b">
-          <HusenBoard label="B" />
+          <HusenBoard label="minimal" />
         </div>
         <Container>
           <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)} fullHeight position="right">

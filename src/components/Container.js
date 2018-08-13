@@ -119,13 +119,25 @@ class Container extends Component {
 			/>
 		  )
 		})
+		this.state.rendarAddButton=""
+		if (this.props.addButton !== false) {
+      this.state.rendarAddButton=(
+			  <span title="add note." style={{right: 0,top: 0, position: "absolute"}} onClick={this.addNewNote.bind(this)}>
+			    +
+			  </span>)
+		}
+		this.state.rendarLabel=(
+		  <h2 style={{margin: "0.2em 0.4em"}}>
+		    {this.props.label}
+		    {this.state.rendarAddButton}
+			</h2>)
+		if (typeof this.props.onContainerRendarLabel === 'function') {
+			this.state.rendarLabel = this.props.onContainerRendarLabel(this)
+		}
 		const { connectDropTarget } = this.props;
  		return connectDropTarget(
 		  <div className="Container" style={{position:"relative"}}>
-				<h2 style={{margin: "0.2em 0.4em"}}>
-				  {this.props.label}
-				  <span title="add note." style={{right: 0,top: 0, position: "absolute"}} onClick={this.addNewNote.bind(this)}>+</span>
-				</h2>
+				{this.state.rendarLabel}
 		  	{notes}
 		  </div>
 		)
