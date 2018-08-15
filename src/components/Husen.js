@@ -5,12 +5,18 @@ import { ItemTypes } from './ItemTypes'
 import './Husen.css'
 
 class Husen extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      title: this.props.title,
+      description: this.props.description,
+    }
+  }
   getStyles(props) {
     const { color, x, y, isDragging } = props
     const transform = `translate3d(${x}px, ${y}px, 0)`
   
     return {
-      position: 'static',
       transform,
       backgroundColor: color ? color : 'lightyellow',
       WebkitTransform: transform,
@@ -29,12 +35,15 @@ class Husen extends Component {
     e.stopPropagation()
   }
   render() {
-    const { connectDragSource, title, description } = this.props;
-    let tooltip = description
+    const { connectDragSource } = this.props;
+    let tooltip = ""
     if (typeof this.props.onNoteRendarTooltip === 'function') {
       tooltip = this.props.onNoteRendarTooltip(this.props)
     }
-    let text = title
+    let text = (<div>
+                 {this.state.title}<br />
+                 {this.state.description}
+                </div>)
     if (typeof this.props.onNoteRendarText === 'function') {
       text = this.props.onNoteRendarText(this.props)
     }
@@ -58,7 +67,6 @@ class Husen extends Component {
 
 Husen.propTypes = {
   id: PropTypes.string.isRequired,
-  key: PropTypes.string.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
   isDragging: PropTypes.bool.isRequired,

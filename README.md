@@ -168,5 +168,9 @@ Apache License 2.0
 * [x] additional info
 * [x] customize note
 * [x] add button@demo
+* [ ] inline edit
+* [ ] save
+* [ ] improve style
+* [ ] refactoring
 * [ ] redux
 

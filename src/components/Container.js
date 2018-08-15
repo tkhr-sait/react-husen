@@ -93,6 +93,15 @@ class Container extends Component {
 			return note
 		})
 		source.container.updateNoteState(notes);
+		if (typeof source.container.props.onNoteMove === 'function') {
+			let note = source.container.state.notes.filter(n => {
+				if (n.id === source.id){
+					return n
+				}
+				return null
+			})
+			source.container.props.onNoteMove(note)
+		}
 	}
 	render() {
 		let deleteButton = this.props.deleteButton === undefined ? true : this.props.deleteButton 
@@ -119,25 +128,25 @@ class Container extends Component {
 			/>
 		  )
 		})
-		this.state.rendarAddButton=""
+		let rendarAddButton=""
 		if (this.props.addButton !== false) {
-      this.state.rendarAddButton=(
+      rendarAddButton=(
 			  <span title="add note." style={{right: "0.4em",top: "0.2em", position: "absolute", cursor: "pointer"}} onClick={this.addNewNote.bind(this)}>
 			    +
 			  </span>)
 		}
-		this.state.rendarLabel=(
-		  <h2 style={{margin: "0.2em 0.4em"}}>
+		let rendarLabel=(
+		  <h2 style={{margin: "0.2em 0.4em", position: "relative"}}>
 		    {this.props.label}
-		    {this.state.rendarAddButton}
+		    {rendarAddButton}
 			</h2>)
 		if (typeof this.props.onContainerRendarLabel === 'function') {
-			this.state.rendarLabel = this.props.onContainerRendarLabel(this)
+			rendarLabel = this.props.onContainerRendarLabel(this)
 		}
 		const { connectDropTarget } = this.props;
  		return connectDropTarget(
-		  <div className="Container" style={{position:"relative"}}>
-				{this.state.rendarLabel}
+		  <div className="Container">
+				{rendarLabel}
 		  	{notes}
 		  </div>
 		)

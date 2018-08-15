@@ -70,7 +70,7 @@ class App extends Component {
   }
   handleContainerRendarLabel(container){
     return(
-    <h2 style={{margin: "0.2em 0.4em"}}>
+    <h2 style={{margin: "0.2em 0.4em", position: "relative"}}>
       {container.props.label}
       <Button onMouseUp={container.addNewNote.bind(container)} style={{right: 0,top: 0, position: "absolute"}}>Add New Husen</Button>
     </h2>)
@@ -106,9 +106,12 @@ class App extends Component {
       if (this.state.target.id !== n.id) {
         return n
       }
+      return null
     })
     this.setState({notes: newNotes})
     this.toggle()
+  }
+  handleNoteMove(){
   }
 
   render() {
@@ -125,6 +128,7 @@ class App extends Component {
            onNoteClick={this.handleNoteClick.bind(this)}
            onNoteAdd={this.handleNoteAdd.bind(this)}
            onNoteDelete={this.handleNoteDelete.bind(this)}
+           onNoteMove={this.handleNoteMove.bind(this)}
            onNotesChange={this.handleNotesChange.bind(this)}
            onNoteInitialize={this.handleNoteInitialize.bind(this)}
            onNoteRendarText={this.handleNoteRendarText.bind(this)}
