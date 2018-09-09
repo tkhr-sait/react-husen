@@ -8,9 +8,20 @@ class Husen extends Component {
   constructor(props){
     super(props)
     this.state = {
+    	isWritable: false,
       title: this.props.title,
       description: this.props.description,
     }
+  }
+  componentWillReceiveProps(nextProps) {
+    // FIXME
+    if ( this.state.isWritable === false ) {
+      this.setState({
+        isWritable: false,
+        title: nextProps.title,
+        description: nextProps.description
+      })
+    } 
   }
   getStyles(props) {
     const { color, x, y, isDragging } = props
@@ -34,16 +45,40 @@ class Husen extends Component {
     this.props.container.deleteNote(this.props)
     e.stopPropagation()
   }
+  updateHusenState(e) {
+ 		this.setState({
+			[e.target.name]: e.target.value
+		})
+		if (typeof this.props.onNoteUpdate === 'function') {
+      let note = Object.assign({},this.props)
+      if (e.target.name === "title") {
+        note.title = e.target.value
+      } else {
+        note.description = e.target.value
+      }
+      this.props.onNoteUpdate(note)
+		}
+	}
   render() {
     const { connectDragSource } = this.props;
     let tooltip = ""
     if (typeof this.props.onNoteRendarTooltip === 'function') {
       tooltip = this.props.onNoteRendarTooltip(this.props)
     }
-    let text = (<div>
-                 {this.state.title}<br />
-                 {this.state.description}
-                </div>)
+    let text = (
+      this.state.isWritable ? (
+        <div>
+          <input name="title" type="text" style={{width:"90%"}} value={this.state.title} onChange={this.updateHusenState.bind(this)}/>
+          <textarea name="description" style={{width:"90%"}} value={this.state.description} onChange={this.updateHusenState.bind(this)}/>
+          <div style={{color: "rgb(255,255,255)",backgroundColor: "rgba(0,0,0,0.3)"}} onClick={() => this.setState({isWritable: !this.state.isWritable})}>close</div>
+        </div>
+      ) : ( 
+       <div style={{width:"100%", height:"100%"}} onClick={() => this.setState({isWritable: !this.state.isWritable})}>
+         {this.state.title}<br />
+         {this.state.description}
+       </div>
+      )
+    )
     if (typeof this.props.onNoteRendarText === 'function') {
       text = this.props.onNoteRendarText(this.props)
     }
@@ -73,8 +108,11 @@ Husen.propTypes = {
   connectDragSource: PropTypes.func.isRequired
 }
 export default DragSource(ItemTypes.HUSEN,  {
-  beginDrag(props) {
-    return props
+  beginDrag(props,monitor,component) {
+    let note = Object.assign({},props)
+    note.title = component.state.title
+    note.description = component.state.description
+    return note
   }
 }, (connect, monitor) => {
   return {
@@ -82,3 +120,4 @@ export default DragSource(ItemTypes.HUSEN,  {
     isDragging: monitor.isDragging()
   }
 })(Husen);
+

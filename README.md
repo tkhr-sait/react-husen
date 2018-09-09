@@ -156,6 +156,8 @@ Apache License 2.0
 
 ### additional info
 
+### inline edit
+
 ## Todo
 
 * [x] drag & drop
@@ -168,9 +170,9 @@ Apache License 2.0
 * [x] additional info
 * [x] customize note
 * [x] add button@demo
-* [ ] inline edit
-* [ ] save
+* [x] inline edit
 * [ ] improve style
+* [ ] save
 * [ ] refactoring
 * [ ] redux
 

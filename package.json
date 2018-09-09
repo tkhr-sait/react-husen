@@ -1,6 +1,6 @@
 {
   "name": "react-husen",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "husen(sticky note) for react",
   "license": "Apache-2.0",
   "main": "dist/index.js",
@@ -20,7 +20,6 @@
     "url": "https://github.com/tkhr-sait/react-husen.git"
   },
   "dependencies": {
-    "browsernizr": "^2.2.0",
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^5.0.1",
     "react-dnd-touch-backend": "^0.5.1",
@@ -31,10 +30,15 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
+    "react-bootstrap": "^0.32.3",
+    "bootstrap": "^3.3.7",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "browsernizr": "^2.2.0",
+    "font-awesome": "^4.7.0",
     "babel-cli": "^6.26.0",
-    "gh-pages": "^1.2.0",
-    "mdbreact": "^4.6.1",
     "dateformat": "^3.0.3",
+    "gh-pages": "^1.2.0",
     "react-scripts": "1.1.4"
   },
   "scripts": {

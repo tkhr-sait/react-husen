@@ -88,6 +88,9 @@ class Container extends Component {
 				let newNote = Object.assign({},note)
 				newNote.x = x
 				newNote.y = y
+				newNote.title = source.title
+				newNote.description = source.description
+				newNote.items = source.items
 				return newNote
 			}
 			return note
@@ -100,7 +103,22 @@ class Container extends Component {
 				}
 				return null
 			})
-			source.container.props.onNoteMove(note)
+			source.container.props.onNoteMove(note[0])
+		}
+	}
+	handleNoteUpdate(note){
+		this.state.notes.map(n => {
+			if ( note.id === n.id ) {
+				let newNote = Object.assign({},n)
+				newNote.title = note.title
+				newNote.description = note.description
+				return newNote
+			}
+			return n
+		})
+		this.updateNoteState(this.state.notes);
+    if (typeof this.props.onNoteUpdate === 'function') {
+			this.props.onNoteUpdate(note)
 		}
 	}
 	render() {
@@ -123,6 +141,7 @@ class Container extends Component {
 				deleteButton={deleteButton}
 				container={this}
 				onNoteClick={this.props.onNoteClick}
+				onNoteUpdate={this.handleNoteUpdate.bind(this)}
 				onNoteRendarText={this.props.onNoteRendarText}
 				onNoteRendarTooltip={this.props.onNoteRendarTooltip}
 			/>

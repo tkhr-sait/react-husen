@@ -30,6 +30,7 @@ class Board extends Component {
          deleteButton={this.props.deleteButton}
          onNoteClick={this.props.onNoteClick}
          onNoteAdd={this.props.onNoteAdd}
+         onNoteUpdate={this.props.onNoteUpdate}
          onNoteDelete={this.props.onNoteDelete}
          onNoteMove={this.props.onNoteMove}
          onNoteInitialize={this.props.onNoteInitialize}

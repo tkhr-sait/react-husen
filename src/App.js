@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Input, Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'mdbreact';
+import { FormControl, Button, Modal } from 'react-bootstrap';
 import HusenBoard from './components'
 import Dateformat from 'dateformat'
 import './App.css'
@@ -72,7 +72,7 @@ class App extends Component {
     return(
     <h2 style={{margin: "0.2em 0.4em", position: "relative"}}>
       {container.props.label}
-      <Button onMouseUp={container.addNewNote.bind(container)} style={{right: 0,top: 0, position: "absolute"}}>Add New Husen</Button>
+      <Button bsStyle="info" onMouseUp={container.addNewNote.bind(container)} style={{right: 0,top: 0, position: "absolute"}}>Add New Husen</Button>
     </h2>)
   }
 
@@ -100,6 +100,7 @@ class App extends Component {
     })
     this.setState({notes: newNotes})
     this.toggle()
+    console.log(this.state.notes)
   }
   handleDelete(){
     let newNotes = this.state.target.container.state.notes.filter(n => {
@@ -139,29 +140,32 @@ class App extends Component {
         <div className="b">
           <HusenBoard label="minimal" />
         </div>
-        <Container>
-          <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)} fullHeight position="right">
-            <ModalHeader toggle={this.toggle.bind(this)}>Edit</ModalHeader>
-            <ModalBody>
-              <Input
-               label="title"
-               onChange={this.handleTitleChange.bind(this)}
-               value={this.state.title}
-               />
-              <Input
-               type="textarea"
-               label="description"
-               onChange={this.handleDescriptionChange.bind(this)}
-               value={this.state.description} 
-               />
-            </ModalBody>
-            <ModalFooter>
-              <Button color="danger" onClick={this.handleDelete.bind(this)}>Delete</Button>
-              <Button color="secondary" onClick={this.toggle.bind(this)}>Close</Button>
-              <Button color="primary" onClick={this.handleSave.bind(this)}>Save</Button>
-            </ModalFooter>
+        <div>
+          <Modal show={this.state.modal} onHide={this.toggle.bind(this)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Edit</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <FormControl
+                type="text"
+                placeholder="title"
+                onChange={this.handleTitleChange.bind(this)}
+                value={this.state.title}
+                />
+              <FormControl
+                componentClass="textarea"
+                placeholder="description"
+                onChange={this.handleDescriptionChange.bind(this)}
+                value={this.state.description} 
+                />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button bsStyle="danger" onClick={this.handleDelete.bind(this)}>Delete</Button>
+              <Button bsStyle="info" onClick={this.toggle.bind(this)}>Close</Button>
+              <Button bsStyle="primary" onClick={this.handleSave.bind(this)}>Save</Button>
+            </Modal.Footer>
           </Modal>
-        </Container>
+        </div>
       </div>
     )
   }
