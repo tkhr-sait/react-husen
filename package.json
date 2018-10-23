@@ -1,6 +1,6 @@
 {
   "name": "react-husen",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "husen(sticky note) for react",
   "license": "Apache-2.0",
   "main": "dist/index.js",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "react-bootstrap": "^0.32.3",
-    "bootstrap": "^3.3.7",
+    "bootstrap": ">=4.1.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "browsernizr": "^2.2.0",
@@ -45,7 +45,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build-lib": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "prepublish": "npm run build-lib",
     "publish": "npm publish",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
