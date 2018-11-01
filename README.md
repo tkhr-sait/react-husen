@@ -3,6 +3,8 @@
 Overview  
 [![npm version](https://badge.fury.io/js/react-husen.svg)](https://badge.fury.io/js/react-husen)  
 
+[demo](https://tkhr-sait.github.io/react-husen/)
+
 ## Description
 
 husen(sticky note) for react
